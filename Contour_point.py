@@ -10,7 +10,6 @@ BGRlower_Upper = [
                   ]                     # 2 : Black
 Color_name = ["BLUE","YELLOW","Black"]
 Object = [ob.Color_Object(Color_name[i]) for i in range(3)]
-
 capture = cv2.VideoCapture(0)
 capture.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
 capture.set(cv2.CAP_PROP_FRAME_HEIGHT, 640)
@@ -32,9 +31,10 @@ def color_select(index):
 while cv2.waitKey(33)!=ord('q'):
     ret, frame = capture.read() 
     height,width,_ = frame.shape  # 영상 세로,가로
-    for i in range(2):
-        Object[i] = color_select(i)
-        contours, _ = cv2.findContours(Object[i].copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    for i in range(3):
+        Object[i].get_points(color_select(i))
+        contours, _ = cv2.findContours(Object[i].points, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        corners = cv2.goodFeaturesToTrack(Object[i].points,4,0.5,50)
         for contour in contours:
             epsilon = 0.02 * cv2.arcLength(contour, True)
             approx = cv2.approxPolyDP(contour, epsilon, True)
@@ -44,6 +44,11 @@ while cv2.waitKey(33)!=ord('q'):
             cv2.putText(frame,Color_name[i],np.int32(center[0]),1,2,(0,255,0),2)
             cv2.circle(frame,np.int32(center[0]),2,(0,255,255),-1)
             # cv2.drawContours(frame, [contour], -1, (0,0,255), 3) 
+        if corners is not None and corners.all():
+            for corner in corners:
+                x,y = corner.ravel()
+                cv2.circle(frame,(int(x),int(y)),10,(255,0,0),-1)    
+
 
     cv2.imshow("VideoFrame", frame)
 capture.release()
