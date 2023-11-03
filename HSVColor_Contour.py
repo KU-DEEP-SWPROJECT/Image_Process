@@ -10,7 +10,7 @@ orangeLower = (100, 200, 200)
 orangeUpper = (140, 255, 255)
 HSVlower_Upper = [ 
     (yellowLower,yellowUpper),
-    (orangeLower,orangeUpper)
+    
     
                   ]                     # 2 : Black
 Color_name = ["Yellow","Orange"]
