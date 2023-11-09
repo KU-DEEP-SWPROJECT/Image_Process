@@ -8,7 +8,7 @@ BGRlower_Upper = [
     (ob.blueLower,ob.blueUpper),        # 0 : Blue
     (ob.yellowLower,ob.yellowUpper),     # 1 : Yellow 
                   ]                     # 2 : Black
-Color_name = ["BLUE","YELLOW","Black"]
+Color_name = ["BLUE","YELLOW"]
 Object = [ob.Color_Object(Color_name[i]) for i in range(2)]
 
 dc = DepthCamera()

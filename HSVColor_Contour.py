@@ -4,13 +4,13 @@ import Color_Object as ob
 from realsense_depth import *
 import pyrealsense2
 
-yellowLower = (30,  100, 10)
-yellowUpper = (70, 255, 255)
+yellowLower = (24,  70, 70) # 색 채도 명도
+yellowUpper = (50, 255, 255)
 orangeLower = (100, 200, 200)
 orangeUpper = (140, 255, 255)
 HSVlower_Upper = [ 
     (yellowLower,yellowUpper),
-    
+    (yellowLower,yellowUpper)
     
                   ]                     # 2 : Black
 Color_name = ["Yellow","Orange"]
@@ -42,14 +42,18 @@ while cv2.waitKey(33)!=ord('q'):
         Object[i].get_points(color_select(i))
         contours, _ = cv2.findContours(Object[i].points, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
         for contour in contours:
-            epsilon = 0.02 * cv2.arcLength(contour, True)
-            approx = cv2.approxPolyDP(contour, epsilon, True)
-            cv2.drawContours(frame, [approx], -1, (0,255,0), 3)
-            center = np.mean(contour,axis=0)
+            area = cv2.contourArea(contour)
+            print(area)
+            if area>2000:
+                epsilon = 0.02 * cv2.arcLength(contour, True)
+                approx = cv2.approxPolyDP(contour, epsilon, True)
+                cv2.drawContours(frame, [approx], -1, (0,255,0), 3)
+                
+                center = np.mean(contour,axis=0)
 
-            # cv2.putText(frame,Color_name[i],np.int32(center[0]),1,2,(0,255,0),2)
-            cv2.circle(frame,np.int32(center[0]),2,(0,255,255),-1)
-            # cv2.drawContours(frame, [contour], -1, (0,0,255), 3) 
+                # cv2.putText(frame,Color_name[i],np.int32(center[0]),1,2,(0,255,0),2)
+                cv2.circle(frame,np.int32(center[0]),2,(0,255,255),-1)
+                # cv2.drawContours(frame, [contour], -1, (0,0,255), 3) 
 
     cv2.imshow("VideoFrame", frame)
 cv2.destroyAllWindows()
