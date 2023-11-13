@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 import Color_Object as ob
-
+from realsense_depth import *
 
 BGRlower_Upper = [ 
     (ob.blueLower,ob.blueUpper),        # 0 : Blue
@@ -26,30 +26,28 @@ def color_select(index):
     
     return Color
 
-
+dc = DepthCamera()
 while cv2.waitKey(33)!=ord('q'):
-    ret, frame = capture.read() 
+    ret, _,frame = dc.get_frame()
+    frame = frame[:340,100:400]
     for i in range(2):
         Object[i].get_points(color_select(i))
         contours, _ = cv2.findContours(Object[i].points, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-        # corners = cv2.goodFeaturesToTrack(Object[i].points,4,0.5,50)
+        corners = cv2.goodFeaturesToTrack(Object[i].points,4,0.5,50)
+        for contour in contours:
+            area = cv2.contourArea(contour)
+            if area > 100:
+                epsilon = 0.02 * cv2.arcLength(np.int32(contour), True)
+                approx = cv2.approxPolyDP(contour, epsilon, True)
+                cv2.drawContours(frame, [approx], -1, (0,255,0), 3)
+                center = np.mean(contour,axis=0)
 
-        contours = np.array(contours)
-        contour = contours.reshape(-1, contours.shape[-1])
-        # print(contour)
-        # epsilon = 0.02 * cv2.arcLength(np.int32(contour), True)
-        # approx = cv2.approxPolyDP(contour, epsilon, True)
-        # cv2.drawContours(frame, [approx], -1, (0,255,0), 3)
-        # center = np.mean(contour,axis=0)
-
-        # cv2.putText(frame,Color_name[i],np.int32(center[0]),1,2,(0,255,0),2)
-        # cv2.circle(frame,np.int32(center[0]),2,(0,255,255),-1)
-        # cv2.drawContours(frame, [contour], -1, (0,0,255), 3) 
-        # if corners is not None:
-        #     for corner in corners:
-        #         x,y = corner.ravel()
-        #         cv2.circle(frame,(int(x),int(y)),10,(255,0,0),-1)    
+                cv2.putText(frame,Color_name[i],np.int32(center[0]),1,2,(0,255,0),2)
+                cv2.circle(frame,np.int32(center[0]),1,(0,255,255),-1)
+                cv2.drawContours(frame, [contour], -1, (0,0,255), 2) 
+                print(center)
+     
 
     cv2.imshow("VideoFrame", frame)
-capture.release()
+dc.release()
 cv2.destroyAllWindows()

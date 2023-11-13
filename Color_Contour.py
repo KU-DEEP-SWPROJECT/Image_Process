@@ -30,19 +30,19 @@ def color_select(index):
 
 while cv2.waitKey(33)!=ord('q'):
     ret,_, frame = dc.get_frame() 
-    height,width,_ = frame.shape  # 영상 세로,가로
-    for i in range(2):
-        Object[i] = color_select(i)
-        contours, _ = cv2.findContours(Object[i].copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-        for contour in contours:
-            epsilon = 0.02 * cv2.arcLength(contour, True)
-            approx = cv2.approxPolyDP(contour, epsilon, True)
-            cv2.drawContours(frame, [approx], -1, (0,255,0), 3)
-            center = np.mean(contour,axis=0)
+    # height,width,_ = frame.shape  # 영상 세로,가로
+    # for i in range(2):
+    #     Object[i] = color_select(i)
+    #     contours, _ = cv2.findContours(Object[i].copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    #     for contour in contours:
+    #         epsilon = 0.02 * cv2.arcLength(contour, True)
+    #         approx = cv2.approxPolyDP(contour, epsilon, True)
+    #         cv2.drawContours(frame, [approx], -1, (0,255,0), 3)
+    #         center = np.mean(contour,axis=0)
 
-            # cv2.putText(frame,Color_name[i],np.int32(center[0]),1,2,(0,255,0),2)
-            cv2.circle(frame,np.int32(center[0]),2,(0,255,255),-1)
-            # cv2.drawContours(frame, [contour], -1, (0,0,255), 3) 
+    #         # cv2.putText(frame,Color_name[i],np.int32(center[0]),1,2,(0,255,0),2)
+    #         cv2.circle(frame,np.int32(center[0]),2,(0,255,255),-1)
+    #         # cv2.drawContours(frame, [contour], -1, (0,0,255), 3) 
 
     cv2.imshow("VideoFrame", frame)
 cv2.destroyAllWindows()
