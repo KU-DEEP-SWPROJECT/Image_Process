@@ -1,10 +1,11 @@
 import numpy as np 
 import cv2 
 import time
+from realsense_depth import *
   
 real_sqaure_size = 4 #실제 네모 큐브의 길이 (cm)
 # Capturing video through webcam 
-webcam = cv2.VideoCapture(0)
+webcam = DepthCamera()
 
 turtle_num =1 # 1번은 노랑, 2번은 파랑....
 count = 20 # 한 번 계산에 turtle_point를 선택할 것인가
@@ -26,7 +27,7 @@ while(1):
     
     # Reading the video from the 
     # webcam in image frames 
-    _, imageFrame = webcam.read() 
+    _, _,imageFrame= webcam.get_frame() 
     
     # Convert the imageFrame in  
     # BGR(RGB color space) to  
@@ -244,6 +245,6 @@ while(1):
     # Program Termination 
     cv2.imshow("Multiple Color Detection in Real-TIme", imageFrame) 
     if cv2.waitKey(10) & 0xFF == ord('q'): 
-        cap.release() 
+        webcam.release() 
         cv2.destroyAllWindows() 
         break
