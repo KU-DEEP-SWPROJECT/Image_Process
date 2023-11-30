@@ -584,8 +584,8 @@ def get_points(loop_exit):
         else :
             k_real_size[k] = (np.mean(r_x), np.mean(r_y))
 
-    for i in range (turtle_num):
-        print(color[i], " 좌표 = ", k_real_size[i])
+    # for i in range (turtle_num):
+    #     print(color[i], " 좌표 = ", k_real_size[i])
 
     piece, final_turtle, final_burden = mapping(k_real_size, turtle_num, burden_real_size, m_color)
     
@@ -595,5 +595,3 @@ def get_points(loop_exit):
     # print(final_burden)
     # print(final_burden.shape)
     return piece, final_turtle, final_burden
-    
-get_points(loop_exit)
