@@ -110,7 +110,7 @@ def get_point_b(x, y, zero, re_left_side, pixel_x_size, pixel_y_size, real_sqaur
 def mapping(k_real_size, turtle_num, burden_real_size, m_color):
     real_bg_size = 200
     bg_x = bg_y = 1000
-    bg_cnt = 40
+    bg_cnt = 1000
     bg_size = bg_x/bg_cnt
     
 
@@ -137,7 +137,7 @@ def mapping(k_real_size, turtle_num, burden_real_size, m_color):
     for i in range(bg_cnt+1):
         for j in range(bg_cnt+1):
             cv2.rectangle(background, (int(bg_size*i), int(bg_size*j)), (int(bg_size), int(bg_size)), color, thickness)
-    cv2.circle(background, (int(bg_size*bg_cnt/2), int(bg_size*bg_cnt/2)),int(bg_x/bg_cnt/2), (0,0,255), -1 )    
+    # cv2.circle(background, (int(bg_size*bg_cnt/2), int(bg_size*bg_cnt/2)),int(bg_x/bg_cnt/2), (0,0,255), -1 )    
 
 
     block_size = real_bg_size / bg_cnt
@@ -166,7 +166,7 @@ def mapping(k_real_size, turtle_num, burden_real_size, m_color):
                 p_y = int (bg_cnt/2 + m_y[i] )
                 turtle_mapping_loc[i][0] = int (p_x*bg_size)
                 turtle_mapping_loc[i][1] = int(p_y*bg_size)
-                cv2.rectangle(background, (int (p_x*bg_size), int(p_y*bg_size)), ( int( (p_x+1)*bg_size), int( (p_y+1)*bg_size)) , m_color[i], -1)
+                # cv2.rectangle(background, (int (p_x*bg_size), int(p_y*bg_size)), ( int( (p_x+1)*bg_size), int( (p_y+1)*bg_size)) , m_color[i], -1)
             
             else:
                 m_x[i] = m_x[i] * -1
@@ -175,7 +175,7 @@ def mapping(k_real_size, turtle_num, burden_real_size, m_color):
                 p_y = int (bg_cnt/2 - m_y[i] )
                 turtle_mapping_loc[i][0] = int (p_x*bg_size)
                 turtle_mapping_loc[i][1] = int(p_y*bg_size)
-                cv2.rectangle(background, (int (p_x*bg_size), int(p_y*bg_size)), ( int( (p_x+1)*bg_size), int( (p_y+1)*bg_size)) , m_color[i], -1)
+                # cv2.rectangle(background, (int (p_x*bg_size), int(p_y*bg_size)), ( int( (p_x+1)*bg_size), int( (p_y+1)*bg_size)) , m_color[i], -1)
             
         else:
             if(m_y[i] < 0):
@@ -185,7 +185,7 @@ def mapping(k_real_size, turtle_num, burden_real_size, m_color):
                 p_y = int (bg_cnt/2 + m_y[i] )
                 turtle_mapping_loc[i][0] = int (p_x*bg_size)
                 turtle_mapping_loc[i][1] = int(p_y*bg_size)
-                cv2.rectangle(background, (int (p_x*bg_size), int(p_y*bg_size)), ( int( (p_x+1)*bg_size), int( (p_y+1)*bg_size)) , m_color[i], -1)
+                # cv2.rectangle(background, (int (p_x*bg_size), int(p_y*bg_size)), ( int( (p_x+1)*bg_size), int( (p_y+1)*bg_size)) , m_color[i], -1)
             else:
                 m_x[i] = m_x[i] * 1
                 m_y[i] = m_y[i] * 1
@@ -193,7 +193,7 @@ def mapping(k_real_size, turtle_num, burden_real_size, m_color):
                 p_y = int (bg_cnt/2 - m_y[i] )
                 turtle_mapping_loc[i][0] = int (p_x*bg_size)
                 turtle_mapping_loc[i][1] = int(p_y*bg_size)
-                cv2.rectangle(background, (int (p_x*bg_size), int(p_y*bg_size)), ( int( (p_x+1)*bg_size), int( (p_y+1)*bg_size)) , m_color[i], -1)
+                # cv2.rectangle(background, (int (p_x*bg_size), int(p_y*bg_size)), ( int( (p_x+1)*bg_size), int( (p_y+1)*bg_size)) , m_color[i], -1)
    
     #들어야 할 짐 그래프 표시
     for i in range(4):
@@ -220,7 +220,7 @@ def mapping(k_real_size, turtle_num, burden_real_size, m_color):
                 p_y = int (bg_cnt/2 + burden_m_y[i] )
                 burden_mapping_loc[i][0] = int (p_x*bg_size)
                 burden_mapping_loc[i][1] = int(p_y*bg_size)
-                cv2.rectangle(background, (int (p_x*bg_size), int(p_y*bg_size)), ( int( (p_x+1)*bg_size), int( (p_y+1)*bg_size)) , (0,0,0), -1)
+               #  cv2.rectangle(background, (int (p_x*bg_size), int(p_y*bg_size)), ( int( (p_x+1)*bg_size), int( (p_y+1)*bg_size)) , (0,0,0), -1)
             
             else:
                 burden_m_x[i] = burden_m_x[i] * -1
@@ -229,7 +229,7 @@ def mapping(k_real_size, turtle_num, burden_real_size, m_color):
                 p_y = int (bg_cnt/2 - burden_m_y[i] )
                 burden_mapping_loc[i][0] = int (p_x*bg_size)
                 burden_mapping_loc[i][1] = int(p_y*bg_size)
-                cv2.rectangle(background, (int (p_x*bg_size), int(p_y*bg_size)), ( int( (p_x+1)*bg_size), int( (p_y+1)*bg_size)) ,(0,0,0), -1)
+              #   cv2.rectangle(background, (int (p_x*bg_size), int(p_y*bg_size)), ( int( (p_x+1)*bg_size), int( (p_y+1)*bg_size)) ,(0,0,0), -1)
             
         else:
             if(burden_m_y[i] < 0):
@@ -239,7 +239,7 @@ def mapping(k_real_size, turtle_num, burden_real_size, m_color):
                 p_y = int (bg_cnt/2 + burden_m_y[i] )
                 burden_mapping_loc[i][0] = int (p_x*bg_size)
                 burden_mapping_loc[i][1] = int(p_y*bg_size)
-                cv2.rectangle(background, (int (p_x*bg_size), int(p_y*bg_size)), ( int( (p_x+1)*bg_size), int( (p_y+1)*bg_size)) ,(0,0,0), -1)
+               #  cv2.rectangle(background, (int (p_x*bg_size), int(p_y*bg_size)), ( int( (p_x+1)*bg_size), int( (p_y+1)*bg_size)) ,(0,0,0), -1)
             else:
                 burden_m_x[i] = burden_m_x[i] * 1
                 burden_m_y[i] = burden_m_y[i] * 1
@@ -247,13 +247,13 @@ def mapping(k_real_size, turtle_num, burden_real_size, m_color):
                 p_y = int (bg_cnt/2 - burden_m_y[i] )
                 burden_mapping_loc[i][0] = int (p_x*bg_size)
                 burden_mapping_loc[i][1] = int(p_y*bg_size)
-                cv2.rectangle(background, (int (p_x*bg_size), int(p_y*bg_size)), ( int( (p_x+1)*bg_size), int( (p_y+1)*bg_size)) ,(0,0,0) , -1)
+               #  cv2.rectangle(background, (int (p_x*bg_size), int(p_y*bg_size)), ( int( (p_x+1)*bg_size), int( (p_y+1)*bg_size)) ,(0,0,0) , -1)
     
     
     
-    cv2.imshow("White Square", background)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+    # cv2.imshow("White Square", background)
+    # cv2.waitKey(0)
+    # cv2.destroyAllWindows()
     return bg_cnt, turtle_mapping_loc, burden_mapping_loc
 
 def get_points(loop_exit):
@@ -273,7 +273,7 @@ def get_points(loop_exit):
     m_turtle_point = np.empty((turtle_num, 2), dtype=int)
     color_count = np.zeros (turtle_num, dtype=int) 
 
-    cnt_i = 20
+    cnt_i = 10
     cnt_real_size = np.empty((turtle_num, cnt_i), dtype=object)
     cnt =[0]*turtle_num #각 터틀봇 마다 넣은 값의 수
     done = np.zeros(turtle_num) # 터틀봇 구역 정하는게 다 끝났는지
@@ -584,14 +584,15 @@ def get_points(loop_exit):
         else :
             k_real_size[k] = (np.mean(r_x), np.mean(r_y))
 
-    # for i in range (turtle_num):
-    #     print(color[i], " 좌표 = ", k_real_size[i])
+    for i in range (turtle_num):
+        print(color[i], " 좌표 = ", k_real_size[i])
 
     piece, final_turtle, final_burden = mapping(k_real_size, turtle_num, burden_real_size, m_color)
     
-    # print(piece)
-    # print(final_turtle)
-    # print(final_turtle.shape)
-    # print(final_burden)
-    # print(final_burden.shape)
+   
     return piece, final_turtle, final_burden
+
+if __name__ == "__main__":
+    result_list = []
+    result_list = get_points(loop_exit)
+    print(result_list)
