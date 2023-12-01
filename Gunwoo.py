@@ -134,9 +134,9 @@ def mapping(k_real_size, turtle_num, burden_real_size, m_color):
     burden_m_x = np.zeros(4, dtype=int)
     burden_m_y = np.zeros(4, dtype=int)
 
-    for i in range(bg_cnt+1):
-        for j in range(bg_cnt+1):
-            cv2.rectangle(background, (int(bg_size*i), int(bg_size*j)), (int(bg_size), int(bg_size)), color, thickness)
+    # for i in range(bg_cnt+1):
+    #     for j in range(bg_cnt+1):
+    #         cv2.rectangle(background, (int(bg_size*i), int(bg_size*j)), (int(bg_size), int(bg_size)), color, thickness)
     # cv2.circle(background, (int(bg_size*bg_cnt/2), int(bg_size*bg_cnt/2)),int(bg_x/bg_cnt/2), (0,0,255), -1 )    
 
 
@@ -273,7 +273,7 @@ def get_points(loop_exit):
     m_turtle_point = np.empty((turtle_num, 2), dtype=int)
     color_count = np.zeros (turtle_num, dtype=int) 
 
-    cnt_i = 10
+    cnt_i = 20
     cnt_real_size = np.empty((turtle_num, cnt_i), dtype=object)
     cnt =[0]*turtle_num #각 터틀봇 마다 넣은 값의 수
     done = np.zeros(turtle_num) # 터틀봇 구역 정하는게 다 끝났는지
@@ -589,7 +589,6 @@ def get_points(loop_exit):
 
     piece, final_turtle, final_burden = mapping(k_real_size, turtle_num, burden_real_size, m_color)
     
-   
     return piece, final_turtle, final_burden
 
 if __name__ == "__main__":
