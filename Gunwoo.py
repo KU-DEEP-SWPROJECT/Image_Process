@@ -260,7 +260,7 @@ def mapping(k_real_size, turtle_num, burden_real_size, m_color):
     # cv2.imshow("White Square", background)
     # cv2.waitKey(0)
     # cv2.destroyAllWindows()
-    return bg_cnt, turtle_mapping_loc, return_burden
+    return bg_cnt, real_bg_size, turtle_mapping_loc, return_burden
 
 def get_points(loop_exit):
     Aruco_Dict = cv2.aruco.Dictionary_get(cv2.aruco.DICT_4X4_50)
@@ -593,9 +593,10 @@ def get_points(loop_exit):
     for i in range (turtle_num):
         print(color[i], " 좌표 = ", k_real_size[i])
 
-    piece, final_turtle, final_burden = mapping(k_real_size, turtle_num, burden_real_size, m_color)
-    
-    return piece, final_turtle, final_burden
+
+    piece, real_bg, final_turtle, final_burden = mapping(k_real_size, turtle_num, burden_real_size, m_color)
+    rad = int(piece / real_bg * 10)
+    return piece, rad, final_turtle, final_burden
 
 if __name__ == "__main__":
     result_list = []
