@@ -110,7 +110,7 @@ def get_point_b(x, y, zero, re_left_side, pixel_x_size, pixel_y_size, real_sqaur
 def mapping(k_real_size, turtle_num, burden_real_size, m_color):
     real_bg_size = 200
     bg_x = bg_y = 1000
-    bg_cnt = 1000
+    bg_cnt = 500
     bg_size = bg_x/bg_cnt
     
 
@@ -250,11 +250,17 @@ def mapping(k_real_size, turtle_num, burden_real_size, m_color):
                #  cv2.rectangle(background, (int (p_x*bg_size), int(p_y*bg_size)), ( int( (p_x+1)*bg_size), int( (p_y+1)*bg_size)) ,(0,0,0) , -1)
     
     
-    
+    return_burden = np.empty((4, 2), dtype=int)
+    return_burden[0] = burden_mapping_loc[2]
+    return_burden[1] = burden_mapping_loc[3]
+    return_burden[2] = burden_mapping_loc[1]
+    return_burden[3] = burden_mapping_loc[0]
+   
+
     # cv2.imshow("White Square", background)
     # cv2.waitKey(0)
     # cv2.destroyAllWindows()
-    return bg_cnt, turtle_mapping_loc, burden_mapping_loc
+    return bg_cnt, turtle_mapping_loc, return_burden
 
 def get_points(loop_exit):
     Aruco_Dict = cv2.aruco.Dictionary_get(cv2.aruco.DICT_4X4_50)
@@ -273,7 +279,7 @@ def get_points(loop_exit):
     m_turtle_point = np.empty((turtle_num, 2), dtype=int)
     color_count = np.zeros (turtle_num, dtype=int) 
 
-    cnt_i = 20
+    cnt_i = 10
     cnt_real_size = np.empty((turtle_num, cnt_i), dtype=object)
     cnt =[0]*turtle_num #각 터틀봇 마다 넣은 값의 수
     done = np.zeros(turtle_num) # 터틀봇 구역 정하는게 다 끝났는지
