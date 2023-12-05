@@ -109,7 +109,7 @@ def get_point_b(x, y, zero, re_left_side, pixel_x_size, pixel_y_size, real_sqaur
 
 def mapping(k_real_size, turtle_num, burden_real_size, m_color):
     real_bg_size = 200
-    pixel_size = 100
+    pixel_size = 200
     
 
 
@@ -127,8 +127,16 @@ def mapping(k_real_size, turtle_num, burden_real_size, m_color):
         turtle_mapping_loc[i][1] = int((100 - oc[i][1]) * block_size)
     for i in range(4):
         burden_mapping_loc[i][0] = int((burden_oc[i][0] + 100) * block_size)
-        burden_mapping_loc[i][1] = int((100-burden_oc[i][1]) * block_size
-)
+        burden_mapping_loc[i][1] = int((100-burden_oc[i][1]) * block_size)
+
+    mid_point = (burden_mapping_loc[0][0] + burden_mapping_loc[2][0]) /2
+    mid_point2 = (burden_mapping_loc[1][0] + burden_mapping_loc[3][0]) /2
+    
+    burden_mapping_loc[0][0] = mid_point
+    burden_mapping_loc[2][0] = mid_point
+
+    burden_mapping_loc[1][0] = mid_point2
+    burden_mapping_loc[3][0] = mid_point2
     
     return_burden = np.empty((4, 2), dtype=int)
     return_burden[0] = burden_mapping_loc[2]
@@ -322,6 +330,7 @@ def get_points(loop_exit):
             bottom_left = goal_l[np.argmax(diff)]
             bottom_right = goal_l[max]
             
+
             aruco_image = cv2.circle(aruco_image, (int(top_left[0]), int(top_left[1])), 10,(0,0,255),-1)
             aruco_image = cv2.circle(aruco_image, (int(top_right[0]), int(top_right[1])), 10,(0,255,0),-1)
             aruco_image = cv2.circle(aruco_image, (int(bottom_left[0]), int(bottom_left[1])), 10,(255,0,0),-1)
