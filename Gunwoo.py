@@ -127,7 +127,7 @@ def mapping(k_real_size, turtle_num, burden_real_size, m_color):
         turtle_mapping_loc[i][1] = int((100 - oc[i][1]) * block_size)
     for i in range(4):
         burden_mapping_loc[i][0] = int((burden_oc[i][0] + 100) * block_size)
-        burden_mapping_loc[i][1] = int((100-burden_oc[i][0]) * block_size
+        burden_mapping_loc[i][1] = int((100-burden_oc[i][1]) * block_size
 )
     
     return_burden = np.empty((4, 2), dtype=int)
