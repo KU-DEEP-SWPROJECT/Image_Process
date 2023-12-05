@@ -129,15 +129,24 @@ def mapping(k_real_size, turtle_num, burden_real_size, m_color):
         burden_mapping_loc[i][0] = int((burden_oc[i][0] + 100) * block_size)
         burden_mapping_loc[i][1] = int((100-burden_oc[i][1]) * block_size)
 
-    mid_point = (burden_mapping_loc[0][0] + burden_mapping_loc[2][0]) /2
-    mid_point2 = (burden_mapping_loc[1][0] + burden_mapping_loc[3][0]) /2
+    mid_x_point = (burden_mapping_loc[0][0] + burden_mapping_loc[2][0]) /2
+    mid_x_point2 = (burden_mapping_loc[1][0] + burden_mapping_loc[3][0]) /2
     
-    burden_mapping_loc[0][0] = mid_point
-    burden_mapping_loc[2][0] = mid_point
+    mid_y_point = (burden_mapping_loc[0][1] + burden_mapping_loc[1][1]) /2
+    mid_y_point2 = (burden_mapping_loc[2][1] + burden_mapping_loc[3][1]) /2
+     
+    burden_mapping_loc[0][0] = mid_x_point
+    burden_mapping_loc[0][1] = mid_y_point
 
-    burden_mapping_loc[1][0] = mid_point2
-    burden_mapping_loc[3][0] = mid_point2
+    burden_mapping_loc[2][0] = mid_x_point
+    burden_mapping_loc[2][1] = mid_y_point2
+
+    burden_mapping_loc[1][0] = mid_x_point2
+    burden_mapping_loc[1][1] = mid_y_point
     
+    burden_mapping_loc[3][0] = mid_x_point2
+    burden_mapping_loc[3][1] = mid_y_point2
+
     return_burden = np.empty((4, 2), dtype=int)
     return_burden[0] = burden_mapping_loc[2]
     return_burden[1] = burden_mapping_loc[3]
