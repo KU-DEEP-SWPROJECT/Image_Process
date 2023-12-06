@@ -1,5 +1,5 @@
 def give_list (count):
-    list
+    list = []
     if (count == 1):
         list = [ 
         200, 10, ([[100, 100],

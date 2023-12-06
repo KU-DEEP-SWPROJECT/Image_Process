@@ -107,9 +107,9 @@ def get_point_b(x, y, zero, re_left_side, pixel_x_size, pixel_y_size, real_sqaur
                 return real_size[0], real_size[1]
 
 
-def mapping(k_real_size, turtle_num, burden_real_size, m_color):
+def mapping(k_real_size, turtle_num, burden_real_size, m_color, pixel_s):
     real_bg_size = 200
-    pixel_size = 200
+    pixel_size = pixel_s
     
 
 
@@ -123,11 +123,11 @@ def mapping(k_real_size, turtle_num, burden_real_size, m_color):
     block_size = pixel_size / real_bg_size
 
     for i in range(turtle_num):
-        turtle_mapping_loc[i][0] = int((oc[i][0] + 100) * block_size)
-        turtle_mapping_loc[i][1] = int((100 - oc[i][1]) * block_size)
+        turtle_mapping_loc[i][0] = int((oc[i][0] + real_bg_size/2) * block_size)
+        turtle_mapping_loc[i][1] = int((real_bg_size/2 - oc[i][1]) * block_size)
     for i in range(4):
-        burden_mapping_loc[i][0] = int((burden_oc[i][0] + 100) * block_size)
-        burden_mapping_loc[i][1] = int((100-burden_oc[i][1]) * block_size)
+        burden_mapping_loc[i][0] = int((burden_oc[i][0] + real_bg_size/2) * block_size)
+        burden_mapping_loc[i][1] = int((real_bg_size/2-burden_oc[i][1]) * block_size)
 
     mid_x_point = (burden_mapping_loc[0][0] + burden_mapping_loc[2][0]) /2
     mid_x_point2 = (burden_mapping_loc[1][0] + burden_mapping_loc[3][0]) /2
@@ -155,7 +155,7 @@ def mapping(k_real_size, turtle_num, burden_real_size, m_color):
    
     return pixel_size, real_bg_size, turtle_mapping_loc, return_burden
 
-def get_points(loop_exit):
+def get_points(loop_exit, pixel_size = 200):
     Aruco_Dict = cv2.aruco.Dictionary_get(cv2.aruco.DICT_4X4_50)
     goal_l = np.zeros((16,2), dtype=int)
     goal_cnt = np.zeros(4)
@@ -488,7 +488,7 @@ def get_points(loop_exit):
         print(color[i], " 좌표 = ", k_real_size[i])
 
 
-    piece, real_bg, final_turtle, final_burden = mapping(k_real_size, turtle_num, burden_real_size, m_color)
+    piece, real_bg, final_turtle, final_burden = mapping(k_real_size, turtle_num, burden_real_size, m_color, pixel_size)
     rad = int(piece / real_bg * 10)
     return piece, rad, final_turtle, final_burden
 
